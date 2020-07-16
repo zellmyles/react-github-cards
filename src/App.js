@@ -10,9 +10,9 @@ class Form extends React.Component {
       const resp = await axios.get(`https://api.github.com/users/${this.userNameInput.current.value}`);
       this.props.onSubmit(resp.data);
       this.userNameInput.current.value = '';
-      // console.log('submitted');
-      // console.log(this.userNameInput.current.value);
-      // console.log(resp.data);
+      console.log('submitted');
+      console.log(this.userNameInput.current.value);
+      console.log(resp.data);
     } catch (error){
       console.error(error);
       console.log('Houston we have a problem!');
@@ -36,20 +36,7 @@ const CardList = (props) => (
     {props.profiles.map(profile => <Card key={profile.id} {...profile}/>)}
   </div>
 )
-class Card extends React.Component {
-  render(){
-    const profile = this.props;
-    return (
-      <div className="github-profile">
-        <img src={profile.avatar_url} />
-        <div className="info">
-          <div className="name">{profile.name}</div>
-          <div className="company">{profile.company}</div>
-        </div>
-      </div>
-    );
-  }
-}
+
 class App extends React.Component {
   constructor(props){
     super(props);
@@ -70,6 +57,21 @@ class App extends React.Component {
       <CardList profiles={this.state.profiles} />
     </div>
     )
+  }
+}
+
+class Card extends React.Component {
+  render(){
+    const profile = this.props;
+    return (
+      <div className="github-profile">
+        <img src={profile.avatar_url} />
+        <div className="info">
+          <div className="name">{profile.name}</div>
+          <div className="company">{profile.company}</div>
+        </div>
+      </div>
+    );
   }
 }
 export default App;
